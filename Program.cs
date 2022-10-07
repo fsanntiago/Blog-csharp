@@ -1,4 +1,5 @@
-﻿using Blog.Repositories;
+﻿using Blog.Models;
+using Blog.Repositories;
 using Microsoft.Data.SqlClient;
 
 namespace Blog
@@ -14,28 +15,40 @@ namespace Blog
 
             ReadUsers(connection);
             ReadRoles(connection);
+            ReadTags(connection);
             connection.Close();
         }
 
         public static void ReadUsers(SqlConnection connection)
         {
-            var repository = new UserRepository(connection);
-            var users = repository.Get();
+            var repository = new Repository<User>(connection);
+            var items = repository.Get();
 
-            foreach (var user in users)
+            foreach (var item in items)
             {
-                Console.WriteLine(user.Name);
+                Console.WriteLine(item.Name);
             }
         }
 
         public static void ReadRoles(SqlConnection connection)
         {
-            var repository = new RoleRepository(connection);
-            var roles = repository.Get();
+            var repository = new Repository<Role>(connection);
+            var items = repository.Get();
 
-            foreach (var role in roles)
+            foreach (var item in items)
             {
-                Console.WriteLine(role.Name);
+                Console.WriteLine(item.Name);
+            }
+        }
+
+        public static void ReadTags(SqlConnection connection)
+        {
+            var repository = new Repository<Tag>(connection);
+            var items = repository.Get();
+
+            foreach (var item in items)
+            {
+                Console.WriteLine(item.Name);
             }
         }
     }
