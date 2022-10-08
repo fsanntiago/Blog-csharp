@@ -13,11 +13,13 @@ namespace Blog
             var connection = new SqlConnection(CONNECTION_STRING);
             connection.Open();
 
-            ReadUsersWithRole(connection);
             //ReadUsers(connection);
+            //ReadUsersWithRole(connection);
             //CreateUsers(connection);
             //ReadRoles(connection);
             //ReadTags(connection);
+            //DeleteUser(connection);
+            //UpdateUser(connection);
             connection.Close();
         }
 
@@ -86,6 +88,21 @@ namespace Blog
             {
                 Console.WriteLine(item.Name);
             }
+        }
+
+        public static void UpdateUser(SqlConnection connection)
+        {
+            var repository = new Repository<User>(connection);
+            var item = repository.Get(2);
+            item.Email = "hello@balta.io";
+            repository.Update(item);
+        }
+
+        public static void DeleteUser(SqlConnection connection)
+        {
+            var repository = new Repository<User>(connection);
+            var item = repository.Get(2);
+            repository.Delete(item);
         }
     }
 }
