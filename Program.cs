@@ -1,5 +1,4 @@
-﻿using Blog.Models;
-using Blog.Repositories;
+﻿using Blog.Screens.UserScreens;
 using Microsoft.Data.SqlClient;
 
 namespace Blog
@@ -10,99 +9,34 @@ namespace Blog
 
         static void Main(string[] args)
         {
-            var connection = new SqlConnection(CONNECTION_STRING);
-            connection.Open();
-
-            //ReadUsers(connection);
-            //ReadUsersWithRole(connection);
-            //CreateUsers(connection);
-            //ReadRoles(connection);
-            //ReadTags(connection);
-            //DeleteUser(connection);
-            //UpdateUser(connection);
-            connection.Close();
-        }
-
-        public static void ReadUsers(SqlConnection connection)
-        {
-            var repository = new Repository<User>(connection);
-            var items = repository.Get();
-
-            foreach (var item in items)
+            using (Database.Connection = new SqlConnection(CONNECTION_STRING))
             {
-                Console.WriteLine(item.Name);
-                foreach (var role in item.Roles)
-                {
-                    Console.WriteLine($" - {role.Name}");
-                }
+                Load();
+                Console.ReadKey();
             }
         }
 
-        public static void ReadUsersWithRole(SqlConnection connection)
+        public static void Load()
         {
-            var repository = new UserRepository(connection);
-            var items = repository.GetWithRoles();
+            Console.Clear();
+            Console.WriteLine("Meu Blog");
+            Console.WriteLine("---------");
+            Console.WriteLine("O que deseja fazer?");
+            Console.WriteLine();
+            Console.WriteLine("1 - Gestão de usuário");
+            Console.WriteLine();
+            Console.WriteLine();
+            var option = short.Parse(Console.ReadLine()!);
 
-            foreach (var item in items)
+            switch (option)
             {
-                Console.WriteLine($"- {item.Name}");
-                foreach (var role in item.Roles)
-                {
-                    Console.WriteLine($" - {role.Name}");
-                }
+                case 1:
+                    MenuUserScreen.Load();
+                    break;
+                default:
+                    Load();
+                    break;
             }
-        }
-
-        public static void CreateUsers(SqlConnection connection)
-        {
-            var user = new User()
-            {
-                Email = "email@balta.io",
-                Bio = "bio",
-                Image = "image",
-                Name = "name",
-                PasswordHash = "hash",
-                Slug = "slug",
-            };
-            var repository = new Repository<User>(connection);
-            repository.Create(user);
-        }
-
-        public static void ReadRoles(SqlConnection connection)
-        {
-            var repository = new Repository<Role>(connection);
-            var items = repository.Get();
-
-            foreach (var item in items)
-            {
-                Console.WriteLine(item.Name);
-            }
-        }
-
-        public static void ReadTags(SqlConnection connection)
-        {
-            var repository = new Repository<Tag>(connection);
-            var items = repository.Get();
-
-            foreach (var item in items)
-            {
-                Console.WriteLine(item.Name);
-            }
-        }
-
-        public static void UpdateUser(SqlConnection connection)
-        {
-            var repository = new Repository<User>(connection);
-            var item = repository.Get(2);
-            item.Email = "hello@balta.io";
-            repository.Update(item);
-        }
-
-        public static void DeleteUser(SqlConnection connection)
-        {
-            var repository = new Repository<User>(connection);
-            var item = repository.Get(2);
-            repository.Delete(item);
         }
     }
 }
