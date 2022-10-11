@@ -49,5 +49,24 @@ namespace Blog.Repositories
 
             return users;
         }
+
+        public User GetByEmail(string email)
+        {
+            var query = "SELECT [Email] FROM [User] WHERE [Email] = @email";
+            var pars = new { email };
+
+            var user = _connection.QueryFirstOrDefault<User>(query, pars);
+
+            return user;
+        }
+
+        public bool LinkUserToARole(int userId, int roleId)
+        {
+            var query = "INSERT INTO [UserRole] VALUES(@userId, roleId)";
+            var pars = new { userId, roleId };
+
+            var rows = _connection.Execute(query, pars);
+            return rows != 0;
+        }
     }
 }
