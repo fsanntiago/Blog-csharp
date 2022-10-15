@@ -1,4 +1,5 @@
-﻿using Blog.Screens.LinkScreens;
+﻿using Blog.Screens.CategoryScreens;
+using Blog.Screens.LinkScreens;
 using Blog.Screens.RoleScreens;
 using Blog.Screens.UserScreens;
 using Microsoft.Data.SqlClient;
@@ -28,6 +29,7 @@ namespace Blog
             Console.WriteLine("1 - Gestão de usuário");
             Console.WriteLine("2 - Gestão de perfil");
             Console.WriteLine("3 - Vincular perfil/usuário");
+            Console.WriteLine("4 - Gestão de categorias");
             Console.WriteLine();
             Console.Write("Digite sua escolha: ");
             var option = short.Parse(Console.ReadLine()!);
@@ -42,6 +44,9 @@ namespace Blog
                     break;
                 case 3:
                     LinkUserToARoleScreen.Load();
+                    break;
+                case 4:
+                    MenuCategoryScreen.Load();
                     break;
                 default:
                     Load();
