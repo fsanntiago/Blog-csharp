@@ -2,6 +2,7 @@
 using Blog.Screens.LinkScreens;
 using Blog.Screens.PostScreens;
 using Blog.Screens.RoleScreens;
+using Blog.Screens.TagScreens;
 using Blog.Screens.UserScreens;
 using Microsoft.Data.SqlClient;
 
@@ -32,6 +33,7 @@ namespace Blog
             Console.WriteLine("3 - Vincular perfil/usuário");
             Console.WriteLine("4 - Gestão de categorias");
             Console.WriteLine("5 - Gestão de posts");
+            Console.WriteLine("6 - Gestão de tags");
             Console.WriteLine();
             Console.Write("Digite sua escolha: ");
             var option = short.Parse(Console.ReadLine()!);
@@ -52,6 +54,9 @@ namespace Blog
                     break;
                 case 5:
                     MenuPostScreen.Load();
+                    break;
+                case 6:
+                    MenuTagScreen.Load();
                     break;
                 default:
                     Load();
