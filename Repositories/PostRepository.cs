@@ -75,5 +75,13 @@ namespace Blog.Repositories
                 }, splitOn: "Id");
             return posts;
         }
+
+        public void LinkPostToTag(int postId, int tagId)
+        {
+            var sql = "INSERT INTO [PostTag] VALUES(@tagId, @postId)";
+            var parms = new { tagId, postId };
+
+            _connection.Execute(sql, parms);
+        }
     }
 }

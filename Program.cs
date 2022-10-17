@@ -34,6 +34,7 @@ namespace Blog
             Console.WriteLine("4 - Gestão de categorias");
             Console.WriteLine("5 - Gestão de posts");
             Console.WriteLine("6 - Gestão de tags");
+            Console.WriteLine("7 - Vincular post/tag");
             Console.WriteLine();
             Console.Write("Digite sua escolha: ");
             var option = short.Parse(Console.ReadLine()!);
@@ -57,6 +58,9 @@ namespace Blog
                     break;
                 case 6:
                     MenuTagScreen.Load();
+                    break;
+                case 7:
+                    LinkPostToTagSreen.Load();
                     break;
                 default:
                     Load();
