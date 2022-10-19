@@ -12,7 +12,7 @@
 
 ## 🔨 Tools
 
-- [.NET 5.0](https://dotnet.microsoft.com/en-us/)
+- [.NET 6.0](https://dotnet.microsoft.com/en-us/)
 - [Dapper](https://github.com/DapperLib/Dapper)
 - [SQL Server](https://www.microsoft.com/pt-br/sql-server/sql-server-downloads)
 
